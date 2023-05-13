@@ -7,8 +7,8 @@ import Button from '@/components/Button';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import toast from 'react-hot-toast';
 import {
-  TemplateIcon
-} from '@heroicons/react/solid';
+  RectangleGroupIcon
+} from '@heroicons/react/24/solid';
 import { generateInviteUrl, priceString, priceStringDivided } from 'utils/helpers';
 import setupStepCheck from '@/utils/setupStepCheck';
 import DueCommissions from '@/components/DueCommissions'; 
@@ -134,7 +134,7 @@ export default function CampaignsPage() {
                   href={`/dashboard/${router?.query?.companyId}/setup/campaign`}
                   className="relative block w-full border-2 border-gray-300 border-dashed rounded-lg p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
-                  <TemplateIcon className="w-10 h-auto mx-auto text-gray-600"/>
+                  <RectangleGroupIcon className="w-10 h-auto mx-auto text-gray-600"/>
                   <span className="mt-2 block text-sm font-medium text-gray-600">Create a campaign</span>
                 </a>
               </div>

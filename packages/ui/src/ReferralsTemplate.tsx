@@ -7,14 +7,14 @@ import Button from '@/components/Button';
 // @ts-ignore
 import { SEOMeta } from '@/templates/SEOMeta'; 
 import {
-  EmojiSadIcon,
+  FaceFrownIcon,
   ChevronDownIcon
-} from '@heroicons/react/solid';
+} from '@heroicons/react/24/solid';
 import { UTCtoString, checkUTCDateExpired, priceString, classNames } from '@/utils/helpers';
 import ReactTooltip from 'react-tooltip';
 import {
   TrashIcon
-} from '@heroicons/react/outline';
+} from '@heroicons/react/24/outline';
 import { Menu, Transition } from '@headlessui/react';
 import { toast } from 'react-hot-toast';
 
@@ -255,7 +255,7 @@ export const ReferralsTemplate = ({ page }: { page: string }) => {
                 <div
                   className="relative block w-full border-2 border-gray-300 border-dashed rounded-lg p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
-                  <EmojiSadIcon className="w-10 h-auto mx-auto text-gray-600"/>
+                  <FaceFrownIcon className="w-10 h-auto mx-auto text-gray-600"/>
                   <span className="mt-2 block text-sm font-medium text-gray-600">You have no referrals yet.</span>
                 </div>
               </div>

@@ -1,9 +1,9 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { ChevronRightIcon } from '@heroicons/react/solid'
-import { BookOpenIcon, CurrencyDollarIcon, TemplateIcon } from '@heroicons/react/outline'
+import { ChevronRightIcon } from '@heroicons/react/24/solid'
+import { BookOpenIcon, CurrencyDollarIcon, RectangleGroupIcon } from '@heroicons/react/24/outline'
 
 const links = [
-  { title: 'Dashboard', href: '/dashboard', description: 'Your dashboard to control campaigns, affiliates and commissions.', icon: TemplateIcon },
+  { title: 'Dashboard', href: '/dashboard', description: 'Your dashboard to control campaigns, affiliates and commissions.', icon: RectangleGroupIcon },
   { title: 'Pricing', href: '/pricing', description: 'View our different pricing plans and see which one most suits your business.', icon: CurrencyDollarIcon },
   { title: 'Resources', href: '/resources', description: 'Learn how to integrate Reflio into your website', icon: BookOpenIcon }
 ];

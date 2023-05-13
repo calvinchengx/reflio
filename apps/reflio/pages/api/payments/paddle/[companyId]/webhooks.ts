@@ -57,14 +57,19 @@ async function paddleWebhooksHandler(req: NextApiRequest, res: NextApiResponse) 
         return res.status(200).json({ 'message': 'Payment type is not Paddle'});
       }
       
-      const cryptoCall = await postData({
+      interface CryptoCall {
+        message?: string;
+        data: string[];
+      }
+
+      const cryptoCall: CryptoCall = await postData({
         url: `${process.env.NEXT_PUBLIC_SITE_URL}/api/team/crypto`,
         data: { 
           cryptoType: "decrypt",
           cryptoArray: [companyFromId?.data?.payment_integration_field_one, companyFromId?.data?.payment_integration_field_two, companyFromId?.data?.payment_integration_field_two]
         },
         token: null
-      });
+      }) as CryptoCall;
 
       if(cryptoCall?.message !== "success"){
         return res.status(200).json({ 'message': 'Payment keys could not be decrypted'});

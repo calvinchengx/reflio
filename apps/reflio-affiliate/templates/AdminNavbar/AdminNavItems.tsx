@@ -3,27 +3,27 @@ import { useUser } from '@/utils/useUser';
 import { useRouter } from 'next/router';
 import { classNames } from '@/utils/helpers';
 import { Listbox, Transition } from '@headlessui/react';
-import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
+import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/24/solid';
 import {
   CogIcon,
   UserGroupIcon,
   CurrencyDollarIcon,
-  TemplateIcon,
+  RectangleGroupIcon,
   SparklesIcon,
-  SearchIcon
-} from '@heroicons/react/outline';
+  MagnifyingGlassIcon
+} from '@heroicons/react/24/outline';
 
 export const AdminNavItems = () => {
   const { signOut } = useUser();
   const router = useRouter();
 
   const navigation = [
-    { name: 'Dashboard', href: `/dashboard`, icon: TemplateIcon },
+    { name: 'Dashboard', href: `/dashboard`, icon: RectangleGroupIcon },
     { name: 'My Campaigns', href: `/dashboard/campaigns`, icon: UserGroupIcon },
     { name: 'Referrals', href: `/dashboard/referrals`, icon: SparklesIcon },
     { name: 'Commissions', href: `/dashboard/commissions`, icon: CurrencyDollarIcon },
-    // { name: 'Campaign Finder', href: `/dashboard/campaigns/finder`, icon: SearchIcon },
-    { name: 'Campaign Finder', href: `/dashboard/campaign-finder`, icon: SearchIcon },
+    // { name: 'Campaign Finder', href: `/dashboard/campaigns/finder`, icon: MagnifyingGlassIcon },
+    { name: 'Campaign Finder', href: `/dashboard/campaign-finder`, icon: MagnifyingGlassIcon },
     { name: 'Settings', href: `/dashboard/settings`, icon: CogIcon }
   ];
 

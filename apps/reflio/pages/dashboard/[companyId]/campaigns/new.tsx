@@ -3,8 +3,8 @@ import CampaignForm from '@/forms/CampaignForm';
 import { SEOMeta } from '@/templates/SEOMeta'; 
 import Button from '@/components/Button'; 
 import {
-  ArrowNarrowLeftIcon
-} from '@heroicons/react/outline';
+  ArrowLongLeftIcon
+} from '@heroicons/react/24/outline';
 
 export default function CreateCampaignPage() {
   const router = useRouter();
@@ -20,7 +20,7 @@ export default function CreateCampaignPage() {
               small
               gray
             >
-              <ArrowNarrowLeftIcon className="mr-2 w-6 h-auto"/>
+              <ArrowLongLeftIcon className="mr-2 w-6 h-auto"/>
               <span>Back to campaigns</span>
             </Button>
           </div>

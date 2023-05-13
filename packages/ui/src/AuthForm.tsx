@@ -85,7 +85,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ type, campaignId, companyId, campai
           !hideDetails &&
           <div className="text-center">
             <h1 className="text-center text-3xl font-extrabold text-gray-900 capitalize mb-3">{authState}</h1>
-            <p className="text-sm">Enter your email below and you'll be sent your magic <span className="lowercase">{authState}</span> link.</p>
+            <p className="text-sm">Enter your email below and you&lsquo;ll be sent your magic <span className="lowercase">{authState}</span> link.</p>
           </div>
           
         }

@@ -8,8 +8,9 @@ import LoadingTile from '@/components/LoadingTile';
 import { useCompany } from '@/utils/CompanyContext';
 import toast from 'react-hot-toast';
 import { FileUploader } from "react-drag-drop-files";
-import { CloudUploadIcon, TrashIcon, PencilAltIcon, DocumentTextIcon } from '@heroicons/react/outline';
+import { CloudArrowUpIcon, TrashIcon, PencilSquareIcon, DocumentTextIcon } from '@heroicons/react/24/outline';
 import { urlImgChecker } from '@/utils/helpers';
+import Image from 'next/image';
 
 export default function AssetsPage() {
   const router = useRouter();
@@ -33,7 +34,9 @@ export default function AssetsPage() {
         let updatedData = data;
         await Promise.all(updatedData?.map(async (file: any) => {
           const signedUrl = await supabase.storage.from(`/`).createSignedUrl(file?.file_name, 120);
-          file.signed_url = signedUrl?.signedURL;
+          if ("data" in signedUrl && signedUrl.data) {
+            file.signed_url = signedUrl.data.signedUrl;
+          }
         }));
         setAssets(updatedData);
       }
@@ -50,6 +53,7 @@ export default function AssetsPage() {
     if(loading === false && activeCompany?.company_id){
       getData();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session, activeCompany]);
 
   const handleFileUpload = async (e: any, uploadTypes: string) => {
@@ -88,12 +92,12 @@ export default function AssetsPage() {
         console.log('error: ', error);    
       }
     
-      if(data?.Key){
+      if(data?.path){
         await supabase.from('assets').insert({
           id: user?.id,
           team_id: activeCompany?.team_id,
           company_id: activeCompany?.company_id,
-          file_name: data?.Key,
+          file_name: data?.path,
           file_custom_name: fileId,
           file_size: file.size,
         });
@@ -191,7 +195,7 @@ export default function AssetsPage() {
           >
             <div className="cursor-pointer p-6 rounded-xl border-4 border-dashed border-gray-300 relative min-h-[120px] flex items-center justify-center">
               <div className="flex justify-center items-center">
-                <CloudUploadIcon className="w-8 text-gray-500 h-auto mr-2"/>
+                <CloudArrowUpIcon className="w-8 text-gray-500 h-auto mr-2"/>
                 <p className="text-lg text-gray-500">Drag and drop assets here, or click to upload.</p>
               </div>
             </div>
@@ -209,7 +213,7 @@ export default function AssetsPage() {
                         {
                           urlImgChecker(asset?.signed_url) === true ?
                             <a href={asset?.signed_url} target="_blank" rel="noreferrer">                        
-                              <img 
+                              <Image 
                                 src={asset?.signed_url} 
                                 alt={asset?.file_custom_name}
                                 className="w-full h-auto max-h-[200px] object-contain"
@@ -224,7 +228,7 @@ export default function AssetsPage() {
                           <button
                             onClick={e=>{handleAssetRename(asset?.asset_id, asset?.file_custom_name)}}
                           >
-                            <PencilAltIcon className="w-auto h-6"/>
+                            <PencilSquareIcon className="w-auto h-6"/>
                           </button>
                           <button
                             onClick={e=>{handleAssetDelete(asset?.asset_id, asset?.file_name)}}

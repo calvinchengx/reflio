@@ -20,10 +20,10 @@ import {
   SelectBoxItem
 } from '@tremor/react';
 import {
-  CashIcon,
+  BanknotesIcon,
   TicketIcon,
   UserGroupIcon,
-} from '@heroicons/react/solid';
+} from '@heroicons/react/24/solid';
 import LoadingTile from '@/components/LoadingTile';
 import { createDaysArray, priceString } from '@/utils/helpers';
 
@@ -104,7 +104,13 @@ export default function HomePage() {
       let affiliateData = await affiliateQuery;
       let affiliateAnalyticsGroup: { date: string; Affiliates: any; }[] = [];
       if(affiliateData?.data){
-        const groups = affiliateData?.data?.reduce((groups, affiliate) => {
+        interface Affiliate {
+          created: string;
+        }
+        interface GroupedAffiliates {
+          [date: string]: Affiliate[];
+        }
+        const groups: GroupedAffiliates = affiliateData?.data?.reduce((groups: GroupedAffiliates, affiliate: Affiliate) => {
           let date = new Date(affiliate?.created).toLocaleDateString("en-US", {month: 'short', day: '2-digit', year: 'numeric'});
 
           if (!groups[date]) {
@@ -114,36 +120,49 @@ export default function HomePage() {
           return groups;
         }, {});
 
-        if(daysArray.length > 90){
-          affiliateAnalyticsGroup = Object.keys(groups).map((date) => {
-            return {
-              date,
-              Affiliates: groups[date]?.length
-            };
-          });
-        } else {
-          daysArray.forEach((day) => {
-            let date = new Date(day).toLocaleDateString("en-US", {month: 'short', day: '2-digit', year: 'numeric'});
-            if(groups[date]){
-              affiliateAnalyticsGroup.push({
-                date: date,
+        if (daysArray) {
+          if (daysArray.length > 90) {
+            affiliateAnalyticsGroup = Object.keys(groups).map((date) => {
+              return {
+                date,
                 Affiliates: groups[date]?.length
+              };
+            });
+          } else {
+            daysArray.forEach((day) => {
+              let date = new Date(day).toLocaleDateString('en-US', {
+                month: 'short',
+                day: '2-digit',
+                year: 'numeric'
               });
-            } else {
-              affiliateAnalyticsGroup.push({
-                date: date,
-                Affiliates: 0
-              });
-            }
-          });
+              if (groups[date]) {
+                affiliateAnalyticsGroup.push({
+                  date: date,
+                  Affiliates: groups[date]?.length
+                });
+              } else {
+                affiliateAnalyticsGroup.push({
+                  date: date,
+                  Affiliates: 0
+                });
+              }
+            });
+          }
         }
 
       }
 
       let referralsData = await referralsQuery;
       let referralsAnalyticsGroup: { date: string; Referrals: any; Signups: any; LinkClicks: any; }[] = [];
+
       if(referralsData?.data){
-        const groups = referralsData?.data?.reduce((groups, referral) => {
+        interface Referral {
+          created: string;
+        }
+        interface GroupedReferrals {
+          [date: string]: Referral[];
+        }
+        const groups: GroupedReferrals = referralsData?.data?.reduce((groups: GroupedReferrals, referral: Referral) => {
           let date = new Date(referral?.created).toLocaleDateString("en-US", {month: 'short', day: '2-digit', year: 'numeric'});
           if (!groups[date]) {
             groups[date] = [];
@@ -152,41 +171,59 @@ export default function HomePage() {
           return groups;
         }, {});
 
-        if(daysArray.length > 90){
-          referralsAnalyticsGroup = Object.keys(groups).map((date) => {
-            return {
-              date,
-              Referrals: groups[date]?.length,
-              Signups: groups[date]?.filter((referral: any) => referral?.referral_reference_email !== null).length,
-              LinkClicks: groups[date]?.length
-            };
-          });
-        } else {
-          daysArray.forEach((day) => {
-            let date = new Date(day).toLocaleDateString("en-US", {month: 'short', day: '2-digit', year: 'numeric'});
-            if(groups[date]){
-              referralsAnalyticsGroup.push({
-                date: date,
+        if (daysArray) {
+          if (daysArray.length > 90) {
+            referralsAnalyticsGroup = Object.keys(groups).map((date) => {
+              return {
+                date,
                 Referrals: groups[date]?.length,
-                Signups: groups[date]?.filter((referral: any) => referral?.referral_reference_email !== null).length,
-                LinkClicks: undefined
+                Signups: groups[date]?.filter(
+                  (referral: any) => referral?.referral_reference_email !== null
+                ).length,
+                LinkClicks: groups[date]?.length
+              };
+            });
+          } else {
+            daysArray.forEach((day) => {
+              let date = new Date(day).toLocaleDateString('en-US', {
+                month: 'short',
+                day: '2-digit',
+                year: 'numeric'
               });
-            } else {
-              referralsAnalyticsGroup.push({
-                date: date,
-                Referrals: 0,
-                Signups: 0,
-                LinkClicks: 0
-              });
-            }
-          });
+              if (groups[date]) {
+                referralsAnalyticsGroup.push({
+                  date: date,
+                  Referrals: groups[date]?.length,
+                  Signups: groups[date]?.filter(
+                    (referral: any) =>
+                      referral?.referral_reference_email !== null
+                  ).length,
+                  LinkClicks: undefined
+                });
+              } else {
+                referralsAnalyticsGroup.push({
+                  date: date,
+                  Referrals: 0,
+                  Signups: 0,
+                  LinkClicks: 0
+                });
+              }
+            });
+          }
         }
       }
 
       let commissionsData = await commissionsQuery;
-      let commissionsAnalyticsGroup: { date: string; Revenue: number; Commissions: any; }[] = [];
+      let commissionsAnalyticsGroup: { date: string; Revenue: number; Commissions: number; }[] = [];
       if(commissionsData?.data){
-        const groups = commissionsData?.data?.reduce((groups, commission) => {
+        interface Commission {
+          created: string;
+          commission_sale_value: string;
+        }
+        interface GroupedCommissions {
+          [date: string]: Commission[];
+        }
+        const groups: GroupedCommissions = commissionsData?.data?.reduce((groups: GroupedCommissions, commission: Commission) => {
           let date = new Date(commission?.created).toLocaleDateString("en-US", {month: 'short', day: '2-digit', year: 'numeric'});
           if (!groups[date]) {
             groups[date] = [];
@@ -195,31 +232,45 @@ export default function HomePage() {
           return groups;
         }, {});
 
-        if(daysArray.length > 90){
-          commissionsAnalyticsGroup = Object.keys(groups).map((date) => {
-            return {
-              date,
-              Revenue: groups[date].reduce((acc: number, o: { commission_sale_value: string; }) => acc + (parseInt(o.commission_sale_value)/100), 0),
-              Commissions: groups[date]?.length
-            };
-          });
-        } else {
-          daysArray.forEach((day) => {
-            let date = new Date(day).toLocaleDateString("en-US", {month: 'short', day: '2-digit', year: 'numeric'});
-            if(groups[date]){
-              commissionsAnalyticsGroup.push({
-                date: date,
-                Revenue: groups[date].reduce((acc: number, o: { commission_sale_value: string; }) => acc + (parseInt(o.commission_sale_value)/100), 0),
+        if (daysArray) {
+          if (daysArray.length > 90) {
+            commissionsAnalyticsGroup = Object.keys(groups).map((date) => {
+              return {
+                date,
+                Revenue: groups[date].reduce(
+                  (acc: number, o: { commission_sale_value: string }) =>
+                    acc + parseInt(o.commission_sale_value) / 100,
+                  0
+                ),
                 Commissions: groups[date]?.length
+              };
+            });
+          } else {
+            daysArray.forEach((day) => {
+              let date = new Date(day).toLocaleDateString('en-US', {
+                month: 'short',
+                day: '2-digit',
+                year: 'numeric'
               });
-            } else {
-              commissionsAnalyticsGroup.push({
-                date: date,
-                Revenue: 0,
-                Commissions: 0
-              });
-            }
-          });
+              if (groups[date]) {
+                commissionsAnalyticsGroup.push({
+                  date: date,
+                  Revenue: groups[date].reduce(
+                    (acc: number, o: { commission_sale_value: string }) =>
+                      acc + parseInt(o.commission_sale_value) / 100,
+                    0
+                  ),
+                  Commissions: groups[date]?.length
+                });
+              } else {
+                commissionsAnalyticsGroup.push({
+                  date: date,
+                  Revenue: 0,
+                  Commissions: 0
+                });
+              }
+            });
+          }
         }
       }
 
@@ -249,6 +300,7 @@ export default function HomePage() {
       console.log('Loading here...')
       getData();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session, activeCompany, dateValue]);
 
   return (
@@ -301,7 +353,7 @@ export default function HomePage() {
                       <Card key={"Revenue"} decoration="top" decorationColor={"amber"}>
                         <Flex justifyContent="justify-start" spaceX="space-x-4">
                           <Icon
-                            icon={CashIcon}
+                            icon={BanknotesIcon}
                             variant="light"
                             size="xl"
                             color={"amber"}

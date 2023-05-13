@@ -1,6 +1,7 @@
 import { ImageResponse } from '@vercel/og';
 import { postData, priceString } from '@/utils/helpers';
 import { NextRequest } from 'next/server';
+import Image from 'next/image';
 
 export const config = {
   runtime: 'edge',
@@ -37,7 +38,7 @@ export default async function handler(req: NextRequest) {
               {
                 campaign?.company_image !== null ? 
                   <div tw="flex h-28 w-auto mx-auto max-w-sm mb-3">
-                    <img style={{ objectFit: 'contain' }} tw="w-full h-full" alt="Logo" src={`${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}${campaign?.company_image}`}/>
+                    <Image style={{ objectFit: 'contain' }} tw="w-full h-full" alt="Logo" src={`${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}${campaign?.company_image}`}/>
                   </div>
                 : 
                   <h1 tw="text-8xl font-semibold mb-3">{campaign?.company_name}</h1>

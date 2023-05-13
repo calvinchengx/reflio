@@ -2,7 +2,7 @@
 
 import { useEffect, useCallback } from 'react';
 import { Button } from '@/components/Button';
-import { CheckCircleIcon } from '@heroicons/react/solid';
+import { CheckCircleIcon } from '@heroicons/react/24/solid';
 import { Features } from '@/components/Features';
 import { Testimonials } from '@/components/Testimonials';
 import { Github } from '@/components/Icons/Github'; 

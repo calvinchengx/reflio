@@ -76,7 +76,7 @@ const CampaignsList = () => {
                                         campaign?.campaign_valid !== false &&
                                         <div>
                                           <p className="text-xl mb-2 font-semibold">{campaign?.campaign_name}</p>
-                                          <p className="text-md">{campaign?.commission_type === 'percentage' ? `${campaign?.commission_value}% commission on all paid referrals` : `${priceString(campaign?.commission_value, campaign?.company_currency)} commission on all paid referrals`}</p> 
+                                          <p className="text-md">{campaign?.commission_type === 'percentage' ? `${campaign?.commission_value}% commission on all paid referrals` : `${priceString(campaign?.commission_value, (campaign ? (campaign?.company_currency as string) : ''))} commission on all paid referrals`}</p> 
                                         </div>
                                       }
                                     </>
@@ -116,7 +116,7 @@ const CampaignsList = () => {
                                 <td className="whitespace-nowrap p-4 text-sm font-semibold text-center">
                                   {`${campaign?.campaign_referrals} referrals`}
                                 </td>
-                                <td className="whitespace-nowrap p-4 text-sm font-semibold text-center">{priceStringDivided(campaign?.commissions_value ?? 0, campaign?.company_currency)}</td>
+                                <td className="whitespace-nowrap p-4 text-sm font-semibold text-center">{priceStringDivided(campaign?.commissions_value ?? 0, (campaign ? (campaign?.company_currency as string) : ''))}</td>
                               </tr>
                           ))}
                         </tbody>
@@ -133,7 +133,7 @@ const CampaignsList = () => {
             </div>
           : userAffiliateDetails?.length === 0 &&
             <div>
-              <p>You haven't joined any campaigns.</p>
+              <p>You haven&lsquo;t joined any campaigns.</p>
             </div>
         }
       </div>

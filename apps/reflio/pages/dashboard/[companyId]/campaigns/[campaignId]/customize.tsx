@@ -6,9 +6,9 @@ import { editCampaignMeta, useUser } from '@/utils/useUser';
 import { SEOMeta } from '@/templates/SEOMeta'; 
 import Button from '@/components/Button'; 
 import {
-  ArrowNarrowLeftIcon,
+  ArrowLongLeftIcon,
   PencilIcon
-} from '@heroicons/react/outline';
+} from '@heroicons/react/24/outline';
 import CampaignInvitePageBlock from '@/components/CampaignInvitePageBlock'; 
 import LoadingDots from '@/components/LoadingDots';
 import CompanyLogoUpload from '@/components/CompanyLogoUpload'; 
@@ -96,7 +96,7 @@ export default function CampaignCustomizerPage() {
               small
               white
             >
-              <ArrowNarrowLeftIcon className="mr-2 w-6 h-auto"/>
+              <ArrowLongLeftIcon className="mr-2 w-6 h-auto"/>
               <span>Back to dashboard</span>
             </Button>
             <div className="ml-4">

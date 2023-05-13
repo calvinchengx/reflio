@@ -7,10 +7,10 @@ import Button from '@/components/Button';
 import { SEOMeta } from '@/templates/SEOMeta'; 
 import {
   UserGroupIcon
-} from '@heroicons/react/solid';
+} from '@heroicons/react/24/solid';
 import {
   TrashIcon
-} from '@heroicons/react/outline';
+} from '@heroicons/react/24/outline';
 import ReactTooltip from 'react-tooltip';
 import { priceStringDivided } from 'utils/helpers';
 import setupStepCheck from '@/utils/setupStepCheck';

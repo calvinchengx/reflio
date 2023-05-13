@@ -4,8 +4,8 @@ import { useRouter } from 'next/router';
 import { useUser } from '@/utils/useUser';
 import { useUserAffiliate } from '@/utils/UserAffiliateContext';
 import {
-  ArrowNarrowLeftIcon
-} from '@heroicons/react/outline';
+  ArrowLongLeftIcon
+} from '@heroicons/react/24/outline';
 import CampaignInvitePageBlock from '@/components/CampaignInvitePageBlock'; 
 import { Logo } from '@/components/Icons/Logo';
 
@@ -34,7 +34,7 @@ export default function CampaignInvite({ publicCampaignData }: any) {
           <div className="w-full bg-gray-200 border-b-4 border-gray-300 py-4">
             <div className="wrapper">
               <a className="font-semibold flex items-center" href="/dashboard">
-                <ArrowNarrowLeftIcon className="w-7 h-auto"/>
+                <ArrowLongLeftIcon className="w-7 h-auto"/>
                 <span className="ml-2">Back to Dashboard</span>
               </a>
             </div>

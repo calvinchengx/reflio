@@ -1,11 +1,19 @@
-export const ReactIconDark = ({ ...props }) => {
+import { SVGProps } from 'react';
+import { FC } from 'react';
+
+interface CustomSVGProps extends SVGProps<SVGSVGElement> {
+  enableBackground?: string;
+}
+
+export const ReactIconDark: FC<CustomSVGProps> = ({ enableBackground, ...props }) => {
+  if (!enableBackground) {
+    enableBackground = "new 0 0 122.88 109.43";
+  }
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 122.88 109.43"
-      style={{
-        enableBackground: "new 0 0 122.88 109.43",
-      }}
+      enableBackground={enableBackground}
       xmlSpace="preserve"
       {...props}
     >

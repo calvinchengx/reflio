@@ -17,7 +17,7 @@ export default function CompanySettingsPage() {
   const [urlLoading, setUrlLoading] = useState(false);
   const [handleLoading, setHandleLoading] = useState(false);
   const [websiteUrlInput, setWebsiteUrlInput] = useState(null);
-  const [companyHandleInput, setCompanyHandleInput] = useState(null);
+  const [companyHandleInput, setCompanyHandleInput] = useState<string | null>(null);
   const [urlValid, setUrlValid] = useState(null);
   const [showApiKey, setShowApiKey] = useState(false);
   

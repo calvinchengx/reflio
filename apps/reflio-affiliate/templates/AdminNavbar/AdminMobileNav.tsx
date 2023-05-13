@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { Fragment, useState } from 'react';
 import {
-  MenuAlt1Icon,
-  XIcon,
-} from '@heroicons/react/outline';
+  Bars3CenterLeftIcon,
+  XMarkIcon,
+} from '@heroicons/react/24/outline';
 import { AffiliateLogo } from '@/components/Icons/AffiliateLogo';
 import { Dialog, Transition } from '@headlessui/react';
 import { AdminNavItems } from '@/templates/AdminNavbar/AdminNavItems';
@@ -56,7 +56,7 @@ export const AdminMobileNav = () => {
                     onClick={() => setSidebarOpen(false)}
                   >
                     <span className="sr-only">Close sidebar</span>
-                    <XIcon className="h-6 w-6 text-white" aria-hidden="true" />
+                    <XMarkIcon className="h-6 w-6 text-white" aria-hidden="true" />
                   </button>
                 </div>
               </Transition.Child>
@@ -80,7 +80,7 @@ export const AdminMobileNav = () => {
           onClick={() => setSidebarOpen(true)}
         >
           <span className="sr-only">Open sidebar</span>
-          <MenuAlt1Icon className="h-6 w-6" aria-hidden="true" />
+          <Bars3CenterLeftIcon className="h-6 w-6" aria-hidden="true" />
         </button>
         <div className="flex justify-center lg:justify-end w-full px-6">
           <div className="flex-shrink-0 flex lg:hidden items-center px-4">

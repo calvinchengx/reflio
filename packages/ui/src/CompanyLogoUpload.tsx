@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { useCompany } from '@/utils/CompanyContext';
 import toast from 'react-hot-toast';
 import Button from '@/components/Button';
+import Image from 'next/image';
 
 export const CompanyLogoUpload = () => {
   const router = useRouter();
@@ -42,7 +43,7 @@ export const CompanyLogoUpload = () => {
         <div className="mt-3 flex items-center">
           {
             activeCompany?.company_image !== null &&
-            <img alt="Logo" src={process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL+activeCompany?.company_image} className="w-10 h-auto mr-4"/>
+            <Image alt="Logo" src={process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL+activeCompany?.company_image} className="w-10 h-auto mr-4"/>
           }
           <input
             onChange={handleFileUpload}

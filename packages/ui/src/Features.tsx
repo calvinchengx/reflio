@@ -1,11 +1,11 @@
 import {
-  EyeOffIcon,
-  LightningBoltIcon,
+  EyeSlashIcon,
+  BoltIcon,
   SparklesIcon,
   CurrencyDollarIcon,
-  GlobeIcon,
+  GlobeAmericasIcon,
   CreditCardIcon
-} from '@heroicons/react/outline';
+} from '@heroicons/react/24/outline';
 
 export const Features = () => {
 
@@ -32,19 +32,19 @@ export const Features = () => {
       name: 'Cross subdomain tracking',
       description: "Is your SaaS on a subdomain? Don't worry. We'll automatically track across your main domain to your sub domain with no extra work on your end.",
       active: true,
-      icon: GlobeIcon
+      icon: GlobeAmericasIcon
     },
     {
       name: "Automated GDPR & Privacy compliance mode",
       description: 'All data is processed through European-owned infrastructure, and our company is registered in the UK. With Reflio, you can choose for referrals located in the EU to automatically be required to confirm their consent before a cookie is set.',
       active: true,
-      icon: EyeOffIcon
+      icon: EyeSlashIcon
     },
     {
       name: 'Our embed script is fast',
       description: "Being under <13kb, our embed code is up to 5x faster than some of our competitors, meaning we're better for your SEO than they are.",
       active: true,
-      icon: LightningBoltIcon
+      icon: BoltIcon
     },
   ];
   

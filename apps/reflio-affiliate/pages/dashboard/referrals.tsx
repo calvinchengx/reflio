@@ -4,8 +4,8 @@ import { postData } from '@/utils/helpers';
 import LoadingTile from '@/components/LoadingTile';
 import SEOMeta from '@/templates/SEOMeta';
 import {
-  EmojiSadIcon
-} from '@heroicons/react/solid';
+  FaceFrownIcon
+} from '@heroicons/react/24/solid';
 import { UTCtoString, checkUTCDateExpired, priceString } from '@/utils/helpers';
 import ReactTooltip from 'react-tooltip';
 
@@ -128,7 +128,7 @@ const ReferralsPage = () => {
                 <div
                   className="relative block w-full border-2 border-gray-300 border-dashed rounded-lg p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
-                  <EmojiSadIcon className="w-10 h-auto mx-auto text-gray-600"/>
+                  <FaceFrownIcon className="w-10 h-auto mx-auto text-gray-600"/>
                   <span className="mt-2 block text-sm font-medium text-gray-600">You have no referrals yet.</span>
                 </div>
               </div>

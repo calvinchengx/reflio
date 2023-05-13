@@ -8,8 +8,8 @@ import { SEOMeta } from '@/templates/SEOMeta';
 import { postData } from 'utils/helpers';
 import LoadingDots from '@/components/LoadingDots';
 import {
-  ArrowNarrowLeftIcon
-} from '@heroicons/react/outline';
+  ArrowLongLeftIcon
+} from '@heroicons/react/24/outline';
 import setupStepCheck from '@/utils/setupStepCheck';
 
 export default function AffiliateInvitePage() {
@@ -82,7 +82,7 @@ export default function AffiliateInvitePage() {
             small
             gray
           >
-            <ArrowNarrowLeftIcon className="mr-2 w-6 h-auto"/>
+            <ArrowLongLeftIcon className="mr-2 w-6 h-auto"/>
             <span>Back to affilates</span>
           </Button>
         </div>

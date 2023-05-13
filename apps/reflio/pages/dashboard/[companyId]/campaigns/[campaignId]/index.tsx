@@ -5,8 +5,8 @@ import LoadingTile from '@/components/LoadingTile';
 import { SEOMeta } from '@/templates/SEOMeta'; 
 import Button from '@/components/Button'; 
 import {
-  ArrowNarrowLeftIcon
-} from '@heroicons/react/outline';
+  ArrowLongLeftIcon
+} from '@heroicons/react/24/outline';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import toast from 'react-hot-toast';
 import { priceString, generateInviteUrl } from 'utils/helpers';
@@ -31,7 +31,7 @@ export default function SingleCampaignPage() {
               small
               gray
             >
-              <ArrowNarrowLeftIcon className="mr-2 w-6 h-auto"/>
+              <ArrowLongLeftIcon className="mr-2 w-6 h-auto"/>
               <span>Back to campaigns</span>
             </Button>
           </div>

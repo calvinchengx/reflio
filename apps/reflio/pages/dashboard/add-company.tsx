@@ -41,8 +41,8 @@ export default function AddCompany() {
 
     setLoading(true);
 
-    await newCompany(userDetails, data).then((result) => {
-      if(result[0]?.company_id){
+    await newCompany(userDetails, data).then((result: any) => {
+      if(result && result[0]?.company_id){
         router.push(`/dashboard/${result[0]?.company_id}`)
       } else {
         if(result === "duplicate"){

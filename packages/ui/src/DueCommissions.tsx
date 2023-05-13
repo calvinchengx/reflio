@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { getSales } from '@/utils/useUser';
 import { useCompany } from '@/utils/CompanyContext';
 import { checkUTCDateExpired } from '@/utils/helpers';
-import { ExclamationIcon } from '@heroicons/react/solid';
+import { ExclamationTriangleIcon } from '@heroicons/react/24/solid';
 import { useRouter } from 'next/router';
 import LoadingDots from '@/components/LoadingDots';
 
@@ -34,7 +34,7 @@ export const DueCommissions = (props: { className?: string; }) => {
       <div className={props?.className && props.className}>
         <a href={`/dashboard/${router?.query?.companyId}/commissions/due`} className="inline-block bg-red-500 hover:bg-red-600 border-l-4 border-red-600 p-4 rounded-xl">
           <div className="flex items-center">
-            <ExclamationIcon className="h-6 w-auto text-white" aria-hidden="true" />
+            <ExclamationTriangleIcon className="h-6 w-auto text-white" aria-hidden="true" />
             <span className="font-semibold text-base text-white ml-2 mb-1">
               You have {commissions?.data?.filter((commission: { paid_at: null; commission_due_date: any; }) => commission?.paid_at === null && checkUTCDateExpired(commission?.commission_due_date) === true)?.length} sales with due commissions
             </span>

@@ -4,27 +4,28 @@ import { useRouter } from 'next/router';
 import { classNames } from '@/utils/helpers';
 import { useCompany } from '@/utils/CompanyContext';
 import { Listbox, Transition } from '@headlessui/react';
-import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
+import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/24/solid';
 import {
   CreditCardIcon,
-  TemplateIcon,
+  RectangleGroupIcon,
   CogIcon,
-  ClipboardCheckIcon,
+  ClipboardDocumentCheckIcon,
   UserGroupIcon,
   ChartBarIcon,
   SparklesIcon,
-  ChatAltIcon,
+  ChatBubbleLeftEllipsisIcon,
   BookOpenIcon,
   MapIcon,
-  SupportIcon,
+  LifebuoyIcon,
   CurrencyDollarIcon,
   BellIcon,
   GiftIcon,
-  CollectionIcon,
-  ChipIcon,
-  CloudDownloadIcon
-} from '@heroicons/react/outline';
+  RectangleStackIcon,
+  CpuChipIcon,
+  CloudArrowDownIcon
+} from '@heroicons/react/24/outline';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export const AdminNavItems = () => {
   const { signOut, planDetails } = useUser();
@@ -33,18 +34,18 @@ export const AdminNavItems = () => {
 
   const manageNavigation = [
     { name: 'Analytics', href: `/dashboard/${activeCompany?.company_id}/analytics`, icon: ChartBarIcon },
-    // { name: 'Home', href: `/dashboard/${activeCompany?.company_id}/home`, icon: TemplateIcon },
-    { name: 'Campaigns', href: `/dashboard/${activeCompany?.company_id}/campaigns`, icon: CollectionIcon },
+    // { name: 'Home', href: `/dashboard/${activeCompany?.company_id}/home`, icon: RectangleGroupIcon },
+    { name: 'Campaigns', href: `/dashboard/${activeCompany?.company_id}/campaigns`, icon: RectangleStackIcon },
     { name: 'Affiliates', href: `/dashboard/${activeCompany?.company_id}/affiliates`, icon: UserGroupIcon },
     { name: 'Referrals', href: `/dashboard/${activeCompany?.company_id}/referrals`, icon: SparklesIcon },
     { name: 'Sales & Commissions', href: `/dashboard/${activeCompany?.company_id}/commissions`, icon: CurrencyDollarIcon },
-    // { name: 'Apps', href: `/dashboard/${activeCompany?.company_id}/apps`, icon: ChipIcon },
-    { name: 'Assets', href: `/dashboard/${activeCompany?.company_id}/assets`, icon: CloudDownloadIcon },
+    // { name: 'Apps', href: `/dashboard/${activeCompany?.company_id}/apps`, icon: CpuChipIcon },
+    { name: 'Assets', href: `/dashboard/${activeCompany?.company_id}/assets`, icon: CloudArrowDownIcon },
     { name: 'Settings', href: `/dashboard/${activeCompany?.company_id}/settings`, icon: CogIcon }
   ];
 
   const settingsNavigation = [
-    { name: 'Setup', href: `/dashboard/${activeCompany?.company_id}/setup`, icon: ClipboardCheckIcon },
+    { name: 'Setup', href: `/dashboard/${activeCompany?.company_id}/setup`, icon: ClipboardDocumentCheckIcon },
     { name: 'Billing / Plans', href: `/dashboard/billing`, icon: CreditCardIcon }
   ];
 
@@ -84,7 +85,7 @@ export const AdminNavItems = () => {
                     <span className="relative w-5 h-5 rounded-full flex items-center mr-2">
                       {
                         activeCompany?.company_url &&
-                        <img 
+                        <Image
                           className="w-full h-full object-fit-contain"
                           src={'https://s2.googleusercontent.com/s2/favicons?domain='+activeCompany?.company_url+''} 
                           alt={`${activeCompany?.company_name} Image`} 
@@ -95,7 +96,7 @@ export const AdminNavItems = () => {
                       {activeCompany?.company_name}
                     </span>
                     <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                      <SelectorIcon className="h-5 w-5" aria-hidden="true" />
+                      <ChevronUpDownIcon className="h-5 w-5" aria-hidden="true" />
                     </span>
                   </Listbox.Button>
 
@@ -115,7 +116,7 @@ export const AdminNavItems = () => {
                           key={company?.company_id}
                           className={({ selected, active }) =>
                             classNames(
-                              selected && 'bg-primary',
+                              selected ? 'bg-primary' : '',
                               'cursor-pointer select-none relative py-3 px-5 border-b-2'
                             )
                           }
@@ -162,7 +163,7 @@ export const AdminNavItems = () => {
               key={item.name}
               href={item.href}
               className={classNames(
-                router?.asPath?.includes(item.href) && 'bg-gray-300',
+                router?.asPath?.includes(item.href) ? 'bg-gray-300' : '',
                 navItemClass
               )}
             >
@@ -179,7 +180,7 @@ export const AdminNavItems = () => {
               key={item.name}
               href={item.href}
               className={classNames(
-                router?.asPath?.includes(item.href) && 'bg-gray-300',
+                router?.asPath?.includes(item.href) ? 'bg-gray-300' : '',
                 navItemClass
               )}
             >
@@ -216,7 +217,7 @@ export const AdminNavItems = () => {
             >
               <div className="flex items-center">
                 <BellIcon className="mr-2 flex-shrink-0 h-5 w-5" aria-hidden="true" />
-                <span>What's New</span>
+                <span>What&lsquo;s New</span>
               </div>
             </button>
           }
@@ -253,7 +254,7 @@ export const AdminNavItems = () => {
             rel="noreferrer"
             target="_blank"
           >
-            <SupportIcon className="mr-2 flex-shrink-0 h-5 w-5" aria-hidden="true" />
+            <LifebuoyIcon className="mr-2 flex-shrink-0 h-5 w-5" aria-hidden="true" />
             <span>Give Feedback</span>
           </Link>
         </div>

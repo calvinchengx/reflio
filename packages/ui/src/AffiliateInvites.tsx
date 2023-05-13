@@ -17,6 +17,7 @@ const AffiliateInvites = (props: { campaignId?: string; }) => {
   useEffect(() => {
     if(props?.campaignId && userAffiliateInvites !== null && userAffiliateInvites?.length > 0){
       if(userAffiliateInvites?.filter((invite: { campaign_id: string; }) => invite?.campaign_id === props?.campaignId).length > 0){
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         campaignInviteData = userAffiliateInvites?.filter((invite: { campaign_id: string; }) => invite?.campaign_id === props?.campaignId)[0];
       }
     }

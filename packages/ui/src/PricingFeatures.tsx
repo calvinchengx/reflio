@@ -1,4 +1,4 @@
-import { CheckIcon, XIcon } from '@heroicons/react/solid';
+import { CheckIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import { ReactElement, JSXElementConstructor, ReactFragment, ReactPortal, Key } from 'react';
 
 export const PricingParams = () => {
@@ -210,7 +210,7 @@ export const PricingFeatures = ({ productName, normal }: { productName: string, 
               {
                 feature.type === 'eligible' ?
                   <CheckIcon className={`${capitalizedName === "Pro" && !normal ? 'text-white' : 'text-green-600'} h-6 w-6`}/>
-                : <XIcon className={`${capitalizedName === "Pro" && !normal ? 'text-white' : 'text-gray-500'} h-6 w-6`}/>
+                : <XMarkIcon className={`${capitalizedName === "Pro" && !normal ? 'text-white' : 'text-gray-500'} h-6 w-6`}/>
               }
               <span className={`${capitalizedName === "Pro" && !normal ? 'text-white' : 'text-gray-500'} text-base`}>{feature.text}</span>
             </li>

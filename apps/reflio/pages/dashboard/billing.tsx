@@ -178,7 +178,7 @@ export default function BillingPage() {
                                   <span>{priceStringDivided(sale?.commission_sale_value, activeCompany?.company_currency)}</span>
                                 </td>
                                 <td className={`whitespace-nowrap px-3 py-4 font-semibold ${checkUTCDateExpired(sale?.commission_due_date) === true && 'text-red-500'}`}>
-                                  <span>{priceStringDivided(((9/100)*sale?.commission_sale_value).toFixed(2), activeCompany?.company_currency)}</span>
+                                  <span>{priceStringDivided(Number(((9/100)*sale?.commission_sale_value).toFixed(2)), activeCompany?.company_currency)}</span>
                                 </td>   
                                 <td className="px-3 py-4 text-sm max-w-xs break-all">
                                   {sale?.commission_description ?? 'N/A'}

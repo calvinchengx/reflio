@@ -6,8 +6,9 @@ import Button from '@/components/Button';
 import { useUserAffiliate } from '@/utils/UserAffiliateContext';
 import { postData } from 'utils/helpers';
 import LoadingTile from '@/components/LoadingTile';
-import { DocumentTextIcon, ArrowNarrowLeftIcon } from '@heroicons/react/outline';
+import { DocumentTextIcon, ArrowLongLeftIcon } from '@heroicons/react/24/outline';
 import { urlImgChecker } from '@/utils/helpers';
+import Image from 'next/image';
 
 const AffiliateCodePage = () => {
   const router = useRouter();
@@ -59,6 +60,7 @@ const AffiliateCodePage = () => {
     if(loading === false && affiliateFiltered?.company_id){
       getData();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session, affiliateFiltered]);
 
   return (
@@ -75,7 +77,7 @@ const AffiliateCodePage = () => {
               mobileFull
               secondary
             >
-              <ArrowNarrowLeftIcon className="mr-2 w-6 h-auto"/>
+              <ArrowLongLeftIcon className="mr-2 w-6 h-auto"/>
               <span>Back to dashboard</span>
             </Button>
           </div>
@@ -94,7 +96,7 @@ const AffiliateCodePage = () => {
                         {
                           urlImgChecker(asset?.signed_url) === true ?
                             <a href={asset?.signed_url} target="_blank" rel="noreferrer">                        
-                              <img 
+                              <Image 
                                 src={asset?.signed_url} 
                                 alt={asset?.file_custom_name}
                                 className="w-full h-auto max-h-[200px] object-contain"
@@ -135,7 +137,7 @@ const AffiliateCodePage = () => {
                     small
                     secondary
                   >
-                    <ArrowNarrowLeftIcon className="mr-2 w-6 h-auto"/>
+                    <ArrowLongLeftIcon className="mr-2 w-6 h-auto"/>
                     <span>Back to dashboard</span>
                   </Button>
                 </div>  

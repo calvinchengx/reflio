@@ -5,6 +5,7 @@ import Button from '@/components/Button';
 import toast from 'react-hot-toast';
 import AffiliateInvites from '@/components/AffiliateInvites'; 
 import { postData } from '@/utils/helpers';
+import Image from 'next/image';
 
 type CampaignInvitePageBlockTypes = {
   publicCampaignData?: any;
@@ -78,7 +79,7 @@ export const CampaignInvitePageBlock: React.FC<CampaignInvitePageBlockTypes> = (
               <div>
                 {
                   publicCampaignData?.company_image !== null ?
-                    <img alt={`${publicCampaignData?.company_name} Logo`} src={process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL+publicCampaignData?.company_image} className="h-12 w-auto mx-auto mb-2"/>
+                    <Image alt={`${publicCampaignData?.company_name} Logo`} src={process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL+publicCampaignData?.company_image} className="h-12 w-auto mx-auto mb-2"/>
                   :
                     <h1 className="text-4xl font-semibold mb-2">{publicCampaignData?.company_name}</h1>
                 }
