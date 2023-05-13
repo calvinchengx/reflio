@@ -15,10 +15,12 @@ export const UserContextProvider = (props) => {
   const [planDetails, setPlanDetails] = useState(null);
 
   useEffect(() => {
-    const session = supabase.auth.session();
-    setSession(session);
-    setUser(session?.user ?? null);
-    const { data: authListener } = supabase.auth.onAuthStateChange(
+    supabase.auth.getSession().then(({ data: { session }}) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+    });
+
+    supabase.auth.onAuthStateChange(
       async (event, session) => {
         setSession(session);
         setUser(session?.user ?? null);
@@ -26,10 +28,6 @@ export const UserContextProvider = (props) => {
     );
 
     setUserFinderLoaded(true);
-
-    return () => {
-      authListener.unsubscribe();
-    };
   }, []);
   const getTeam = () => supabase.from('teams').select('*').single();
   const getUserDetails = () => supabase.from('users').select('*').eq('id', user?.id).single();
@@ -63,6 +61,7 @@ export const UserContextProvider = (props) => {
         }
       );
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const value = {
