@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { supabaseAdmin } from '@/utils/supabase-admin';
 import { createStripeCommission } from '@/utils/processor-helpers/stripe/stripe-helpers';
-import { withSentry } from '@sentry/nextjs';
+import { wrapApiHandlerWithSentry } from '@sentry/nextjs';
 
 async function commissionCreateTask(req: NextApiRequest, res: NextApiResponse) {
   try {    
@@ -41,4 +41,6 @@ async function commissionCreateTask(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-export default process.env.SENTRY_AUTH_TOKEN ? withSentry(commissionCreateTask) : commissionCreateTask;
+const wrappedHandler = wrapApiHandlerWithSentry(commissionCreateTask, '/api/tasks/commission-create');
+
+export default process.env.SENTRY_AUTH_TOKEN ? wrappedHandler : commissionCreateTask;

@@ -5,7 +5,7 @@ import {
   createPaddleCommission,
   refundCommission
 } from '@/utils/processor-helpers/paddle/paddle-helpers';
-import { withSentry } from '@sentry/nextjs';
+import { wrapApiHandlerWithSentry } from '@sentry/nextjs';
 
 async function paddleWebhooksHandler(req: NextApiRequest, res: NextApiResponse) {
   const PaddleSDK = require('paddle-sdk');
@@ -114,4 +114,6 @@ async function paddleWebhooksHandler(req: NextApiRequest, res: NextApiResponse) 
   }
 };
 
-export default process.env.SENTRY_AUTH_TOKEN ? withSentry(paddleWebhooksHandler) : paddleWebhooksHandler;
+const wrappedHandler = wrapApiHandlerWithSentry(paddleWebhooksHandler, '/api/payments/paddle/[companyId]/webhooks');
+
+export default process.env.SENTRY_AUTH_TOKEN ? wrappedHandler : paddleWebhooksHandler;

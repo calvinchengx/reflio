@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { encrypt, decrypt } from '@/utils/crypto';
-import { withSentry } from '@sentry/nextjs';
+import { wrapApiHandlerWithSentry } from '@sentry/nextjs';
  
 async function cryptoCall(req: NextApiRequest, res: NextApiResponse) {
 
@@ -32,4 +32,6 @@ async function cryptoCall(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-export default process.env.SENTRY_AUTH_TOKEN ? withSentry(cryptoCall) : cryptoCall;
+const wrappedHandler = wrapApiHandlerWithSentry(cryptoCall, '/api/team/crypto');
+
+export default process.env.SENTRY_AUTH_TOKEN ? wrappedHandler : cryptoCall;

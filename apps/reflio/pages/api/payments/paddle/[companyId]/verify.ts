@@ -1,8 +1,8 @@
-import type { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 import { supabaseAdmin } from '@/utils/supabase-admin';
-import { withSentry } from '@sentry/nextjs';
+import { wrapApiHandlerWithSentry } from '@sentry/nextjs';
 
-async function paddleSetupHandler(req: NextApiRequest, res: NextApiResponse) {
+const paddleSetupHandler: NextApiHandler<any> = async (req: NextApiRequest, res: NextApiResponse<any>) => {
   const PaddleSDK = require('paddle-sdk');
 
   try {    
@@ -44,4 +44,6 @@ async function paddleSetupHandler(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-export default process.env.SENTRY_AUTH_TOKEN ? withSentry(paddleSetupHandler) : paddleSetupHandler;
+const wrappedHandler = wrapApiHandlerWithSentry(paddleSetupHandler, '/api/payments/paddle/[companyId]/setup');
+
+export default process.env.SENTRY_AUTH_TOKEN ? wrappedHandler : paddleSetupHandler;
