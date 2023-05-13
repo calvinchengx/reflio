@@ -4,15 +4,15 @@ import { useCompany } from '@/utils/CompanyContext';
 import LoadingTile from '@/components/LoadingTile';
 import Button from '@/components/Button'; 
 import {
-  EmojiSadIcon
-} from '@heroicons/react/solid';
+  FaceFrownIcon
+} from '@heroicons/react/24/solid';
 import { UTCtoString, priceStringDivided, checkUTCDateExpired, classNames } from '@/utils/helpers';
 import ReactTooltip from 'react-tooltip';
 import { Menu, Transition } from '@headlessui/react';
-import { ChevronDownIcon, ExclamationIcon } from '@heroicons/react/solid';
+import { ChevronDownIcon, ExclamationTriangleIcon } from '@heroicons/react/24/solid';
 import {
   TrashIcon
-} from '@heroicons/react/outline';
+} from '@heroicons/react/24/outline';
 import { useRouter } from 'next/router';
 import { CSVDownload } from "react-csv";
 import toast from 'react-hot-toast';
@@ -238,7 +238,7 @@ export const CommissionsTemplate = ({ page }) => {
                   <div className="mb-6">
                     <a href={`/dashboard/${router?.query?.companyId}/commissions/due`} className="inline-block bg-red-500 hover:bg-red-600 border-l-4 border-red-600 p-4 rounded-xl">
                       <div className="flex items-center">
-                        <ExclamationIcon className="h-6 w-auto text-white" aria-hidden="true" />
+                        <ExclamationTriangleIcon className="h-6 w-auto text-white" aria-hidden="true" />
                         <span className="font-semibold text-base text-white ml-2 mb-1">
                           You have {commissions?.data?.filter(commission => commission?.paid_at === null && checkUTCDateExpired(commission?.commission_due_date) === true)?.length} sales with due commissions. Click here to manage them.
                         </span>
@@ -428,7 +428,7 @@ export const CommissionsTemplate = ({ page }) => {
                 <div
                   className="relative block w-full border-2 border-gray-300 border-dashed rounded-lg p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
-                  <EmojiSadIcon className="w-10 h-auto mx-auto text-gray-600"/>
+                  <FaceFrownIcon className="w-10 h-auto mx-auto text-gray-600"/>
                   <span className="mt-2 block text-sm font-medium text-gray-600">You have no {page !== "index" && page} commissions yet.</span>
                 </div>
               </div>

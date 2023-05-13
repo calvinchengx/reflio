@@ -39,6 +39,7 @@ export const UserContextProvider = (props) => {
         }
       );
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const value = {
@@ -47,8 +48,8 @@ export const UserContextProvider = (props) => {
     userDetails,
     userLoaded,
     userFinderLoaded,
-    signIn: (options) => supabase.auth.signIn({email: options.email}, {shouldCreateUser: options.shouldCreateUser, redirectTo: options.redirectTo}),
-    signInWithPassword: (options) => supabase.auth.signIn({email: options.email, password: options.password}, {shouldCreateUser: options.shouldCreateUser, redirectTo: options.redirectTo}),
+    signIn: (options) => supabase.auth.signInOtp({email: options.email}, {shouldCreateUser: options.shouldCreateUser, redirectTo: options.redirectTo}),
+    signInWithPassword: (options) => supabase.auth.signInWithPassword({email: options.email, password: options.password}, {shouldCreateUser: options.shouldCreateUser, redirectTo: options.redirectTo}),
     signUp: (options) => supabase.auth.signUp({email: options.email, password: options.password}, {redirectTo: options.redirectTo}),
     forgotPassword: (email) => supabase.auth.api.resetPasswordForEmail(email),
     signOut: () => {

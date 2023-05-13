@@ -2,10 +2,10 @@ import { useRouter } from 'next/router';
 import { useCompany } from './CompanyContext';
 import { useCampaign } from './CampaignContext';
 
-export default function setupStepCheck(type) {
-  const router = useRouter();
-  const { activeCompany } = useCompany();
-  const { userCampaignDetails } = useCampaign();
+export default function setupStepCheck(type, router, activeCompany, userCampaignDetails) {
+  // const router = useRouter();
+  // const { activeCompany } = useCompany();
+  // const { userCampaignDetails } = useCampaign();
 
   const replaceUrl = (url) => {
     if(router.asPath === `/dashboard/${router?.query?.companyId}${url}`) return false;

@@ -20,9 +20,14 @@ export const CompanyContextProvider = (props) => {
   });
 
   if(userCompanyDetails !== null && userCompanyDetails?.length === 0 && !router?.asPath?.includes('add-company') && router?.pathname !== '/dashboard/create-team'){
+    console.log("Are we here in CompanyContextProvider?");
+    console.log(team);
+    console.log(creatingTeam);
     if(team === 'none' && router?.pathname !== '/dashboard/create-team' && creatingTeam === false){
       setCreatingTeam(true);
       newTeam(user, {"team_name": "My team"}).then((result) => {
+        console.log("CompanyContext executing newTeam");
+        console.log(result);
         router.replace('/dashboard/add-company');
       });
     }

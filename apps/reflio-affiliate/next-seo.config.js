@@ -1,4 +1,4 @@
-export default {
+const seo = {
   title: 'Reflio: Create a privacy-friendly referral program for your SaaS.',
   description: 'Create a privacy-friendly referral program for your SaaS. GDPR Friendly. Based in the UK. European-owned infrastructure.',
   keywords: 'Reflio, Referral software, create referral program, stripe referral program',
@@ -23,3 +23,5 @@ export default {
     }
   ]
 };
+
+export default seo;

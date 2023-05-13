@@ -43,7 +43,7 @@ export const CompanyLogoUpload = () => {
         <div className="mt-3 flex items-center">
           {
             activeCompany?.company_image !== null &&
-            <Image alt="Logo" src={process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL+activeCompany?.company_image} className="w-10 h-auto mr-4"/>
+            <Image alt="Logo" src={process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL+activeCompany?.company_image} className="w-10 h-auto mr-4" width={80} height={80}/>
           }
           <input
             onChange={handleFileUpload}

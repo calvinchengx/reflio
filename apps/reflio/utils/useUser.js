@@ -41,9 +41,22 @@ export const UserContextProvider = (props) => {
   useEffect(() => {
     if (user) {
       Promise.allSettled([getTeam(), getUserDetails(), getSubscription()]).then(
-        (results) => {
+        async (results) => {
+          console.log("UserContextProvider");
+          console.log(results);
           if(results[0].value.data !== null){
+            console.log(results[0].value.data);
             setTeam(results[0].value.data);
+
+            const userUpdate = await supabase
+            .from('users')
+            .update({
+              team_id: results[0].value.data.team_id
+            })
+            .eq('id', user?.id);
+            console.log("User updated?");
+            console.log(userUpdate);
+            
           } else {
             setTeam('none');
           }
@@ -73,8 +86,8 @@ export const UserContextProvider = (props) => {
     subscription,
     userFinderLoaded,
     planDetails,
-    signIn: (options) => supabase.auth.signIn({email: options.email}, {shouldCreateUser: options.shouldCreateUser, redirectTo: options.redirectTo}),
-    signInWithPassword: (options) => supabase.auth.signIn({email: options.email, password: options.password}, {shouldCreateUser: options.shouldCreateUser, redirectTo: options.redirectTo}),
+    signIn: (options) => supabase.auth.signInWithOtp({email: options.email}, {shouldCreateUser: options.shouldCreateUser, redirectTo: options.redirectTo}),
+    signInWithPassword: (options) => supabase.auth.signInWithPassword({email: options.email, password: options.password}, {shouldCreateUser: options.shouldCreateUser, redirectTo: options.redirectTo}),
     signUp: (options) => supabase.auth.signUp({email: options.email, password: options.password}, {redirectTo: options.redirectTo}),
     forgotPassword: (email) => supabase.auth.api.resetPasswordForEmail(email),
     signOut: () => {
@@ -350,7 +363,11 @@ export const newTeam = async (user, form) => {
     team_name: form?.team_name
   });
 
-  if(data && data[0]?.team_id){
+  console.log("we should be updating our user as well")
+  console.log(data);
+
+  if (data && data[0]?.team_id) {
+    console.log('Did we manage to do a userUpdate?');
     const userUpdate = await supabase
       .from('users')
       .update({
@@ -358,16 +375,26 @@ export const newTeam = async (user, form) => {
       })
       .eq('id', user?.id);
 
-      if(userUpdate?.data && userUpdate?.data !== null){
-        return "success";
-      }
+    if (userUpdate?.data && userUpdate?.data !== null) {
+      console.log('Yes we managed to do a userUpdate');
+      return 'success';
+    }
+    console.log('No we failed to do a userUpdate');
   }
 
   return "error";
 };
 
 export const newCompany = async (user, form) => {
+  console.log("newCompany invoked")
+  console.log(user)
+  console.log(form?.company_handle);
+  console.log(form?.company_url);
+  console.log(form?.company_name);
   if(!form?.company_handle || !form?.company_url || !form?.company_name) return "error";
+
+  console.log(user?.id);
+  console.log(user?.team_id)
 
   const { data, error } = await supabase.from('companies').insert({
     id: user?.id,
@@ -377,6 +404,9 @@ export const newCompany = async (user, form) => {
     company_handle: form?.company_handle,
     domain_verified: false
   });
+
+  console.log("Error");
+  console.log(error);
 
   if (error) {
     if(error?.code === "23505"){

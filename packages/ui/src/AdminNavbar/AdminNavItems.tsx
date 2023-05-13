@@ -89,6 +89,8 @@ export const AdminNavItems = () => {
                           className="w-full h-full object-fit-contain"
                           src={'https://s2.googleusercontent.com/s2/favicons?domain='+activeCompany?.company_url+''} 
                           alt={`${activeCompany?.company_name} Image`} 
+                          width={80}
+                          height={80}
                         />
                       }
                     </span>

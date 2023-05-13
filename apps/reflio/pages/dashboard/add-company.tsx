@@ -5,15 +5,25 @@ import { SEOMeta } from '@/templates/SEOMeta';
 import Button from '@/components/Button'; 
 import { checkValidUrl, slugifyString } from '@/utils/helpers';
 import toast from 'react-hot-toast';
+import { useCompany } from '@/utils/CompanyContext';
 
 export default function AddCompany() {
   const router = useRouter();
-  const { userDetails } = useUser();
+  const { userDetails, team } = useUser();
+  const { activeCompany } = useCompany();
   const [errorMessage, setErrorMessage] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [websiteUrlInput, setWebsiteUrlInput] = useState(null);
-  const [companyHandleInput, setCompanyHandleInput] = useState<any>(null);
-  const [urlValid, setUrlValid] = useState<any>(null);
+  const [websiteUrlInput, setWebsiteUrlInput] = useState<string>("");
+  const [companyHandleInput, setCompanyHandleInput] = useState<string>("");
+  const [urlValid, setUrlValid] = useState<boolean | null>(null);
+
+  console.log("Retrieve team details on AddCompany page")
+  console.log(team)
+  console.log(userDetails)
+  console.log(activeCompany);
+  if (activeCompany?.company_id && activeCompany?.company_name && activeCompany?.company_url && activeCompany?.company_handle) {
+    router.replace(`/dashboard/${activeCompany?.company_id}`);
+  }
 
   const handleSubmit = async (e: { preventDefault: () => void; target: HTMLFormElement | any; }) => {
 
@@ -42,7 +52,11 @@ export default function AddCompany() {
     setLoading(true);
 
     await newCompany(userDetails, data).then((result: any) => {
+      console.log("company id is:")
+      console.log(result);
+      console.log(result[0]?.company_id);
       if(result && result[0]?.company_id){
+        console.log("go to dashboard");
         router.push(`/dashboard/${result[0]?.company_id}`)
       } else {
         if(result === "duplicate"){

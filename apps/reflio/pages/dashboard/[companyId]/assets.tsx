@@ -217,6 +217,8 @@ export default function AssetsPage() {
                                 src={asset?.signed_url} 
                                 alt={asset?.file_custom_name}
                                 className="w-full h-auto max-h-[200px] object-contain"
+                                width={80}
+                                height={80}
                               />
                             </a>
                           :

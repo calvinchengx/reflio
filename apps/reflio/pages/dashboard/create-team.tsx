@@ -40,6 +40,9 @@ export default function CreateTeam() {
 
   };
 
+  console.log("CreateTeam");
+  console.log(team);
+
   if(team !== null && team?.id && team?.team_name){
     router.replace('/dashboard');
   }
