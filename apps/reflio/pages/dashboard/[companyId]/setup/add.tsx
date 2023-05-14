@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import SetupProgress from '@/components/SetupProgress';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import { monokaiSublime } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { monokaiSublime } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import Button from '@/components/Button'; 
 import Card from '@/components/Card'; 
 import { SEOMeta } from '@/templates/SEOMeta'; 
