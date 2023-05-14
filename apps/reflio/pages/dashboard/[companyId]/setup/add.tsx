@@ -18,6 +18,29 @@ export default function TrackingSetupPage() {
   `<script type="text/javascript">
     await Reflio.signup('yourcustomer@email.com')
 </script>`
+
+const paddleExampleCodeBuy = `<a href="#" id="buy-button">Buy now!</a>
+<script type="text/javascript">
+    function paddleCheckout() {
+        Paddle.Checkout.open({ product: 123 });
+    }
+    document.getElementById('buy-button').addEventListener('click', paddleCheckout, false);
+</script>`
+
+const paddleExampleCode = `<a href="#" id="buy-button">Buy now!</a>
+<script type="text/javascript">
+    function paddleCheckout() {
+        var reflioReferral = null;
+        if(typeof Reflio !== "undefined"){
+          reflioReferral = Reflio.getReferralId();
+        }
+        Paddle.Checkout.open({ 
+            product: 123,
+            passthrough: JSON.stringify({ referral: reflioReferral })
+        });
+    }
+    document.getElementById('buy-button').addEventListener('click', paddleCheckout, false);
+</script>`
   
   return (
     <>
@@ -118,13 +141,7 @@ export default function TrackingSetupPage() {
                     language="javascript"
                     style={monokaiSublime}
                   >
-                    {`<a href="#" id="buy-button">Buy now!</a>
-<script type="text/javascript">
-    function paddleCheckout() {
-        Paddle.Checkout.open({ product: 123 });
-    }
-    document.getElementById('buy-button').addEventListener('click', paddleCheckout, false);
-</script>`}
+                    {paddleExampleCodeBuy}
                   </SyntaxHighlighter>
                 </div>
                 <p className="mb-4 mt-4 text-lg">
@@ -139,20 +156,7 @@ export default function TrackingSetupPage() {
                     language="javascript"
                     style={monokaiSublime}
                   >
-                    {`<a href="#" id="buy-button">Buy now!</a>
-<script type="text/javascript">
-    function paddleCheckout() {
-        var reflioReferral = null;
-        if(typeof Reflio !== "undefined"){
-          reflioReferral = Reflio.getReferralId();
-        }
-        Paddle.Checkout.open({ 
-            product: 123,
-            passthrough: JSON.stringify({ referral: reflioReferral })
-        });
-    }
-    document.getElementById('buy-button').addEventListener('click', paddleCheckout, false);
-</script>`}
+                    {paddleExampleCode}
                   </SyntaxHighlighter>
                 </div>
                 <p className="mb-4 mt-4 text-lg">
